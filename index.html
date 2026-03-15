@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zim | Web Designer & Full-Stack Developer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap"
+        rel="stylesheet">
+    <style>
+        /* Modern System-Based Theme Variables */
+        :root {
+            --bg: #ffffff;
+            --text: #1a1a1a;
+            --primary: #6366f1;
+            --secondary: #4f46e5;
+            --card-bg: #f8fafc;
+            --border: #e2e8f0;
+            --accent: #f59e0b;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #0f172a;
+                --text: #f8fafc;
+                --primary: #818cf8;
+                --secondary: #6366f1;
+                --card-bg: #1e293b;
+                --border: #334155;
+            }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        /* Navbar */
+        nav {
+            padding: 25px 10%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            letter-spacing: -1px;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 100px 10%;
+            display: flex;
+            align-items: center;
+            min-height: 90vh;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+
+        .hero-content h1 span {
+            color: var(--primary);
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            color: #94a3b8;
+            max-width: 600px;
+            margin-bottom: 35px;
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 15px 35px;
+            border-radius: 12px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            border: none;
+        }
+
+        .btn-outline {
+            border: 2px solid var(--border);
+            color: var(--text);
+            margin-left: 15px;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.2);
+        }
+
+        /* Projects Section */
+        .section {
+            padding: 100px 10%;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            text-align: center;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid var(--border);
+            position: relative;
+        }
+
+        .project-card:hover {
+            border-color: var(--primary);
+        }
+
+        .project-card h3 {
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+
+        .tag {
+            font-size: 0.8rem;
+            padding: 5px 12px;
+            background: rgba(99, 102, 241, 0.1);
+            color: var(--primary);
+            border-radius: 20px;
+            margin-right: 8px;
+        }
+
+        /* Skills Section */
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 40px;
+        }
+
+        .skill-chip {
+            padding: 12px 25px;
+            border: 1px solid var(--border);
+            border-radius: 50px;
+            font-weight: 600;
+        }
+
+        footer {
+            text-align: center;
+            padding: 50px;
+            border-top: 1px solid var(--border);
+            color: #94a3b8;
+        }
+
+        div[id]:target {
+            border-left: 8px solid var(--primary) !important;
+            background: var(--card-bg);
+            box-shadow: 0 0 30px rgba(99, 102, 241, 0.3);
+            transform: scale(1.02);
+            outline: none;
+        }
+
+
+        #ecommerce-details,
+        #edu-details,
+        #corp-details,
+        #admin-details,
+        #health-details {
+            transition: all 0.5s ease-in-out;
+        }
+
+        div[id] {
+            scroll-margin-top: 100px;
+        }
+
+        /* 1. Target Highlighting Logic */
+        :target {
+            border-left: 10px solid #6366f1 !important;
+            background-color: rgba(99, 102, 241, 0.1) !important;
+            box-shadow: 0 0 40px rgba(99, 102, 241, 0.4);
+            transform: scale(1.03);
+            padding: 40px !important;
+            border-radius: 0 20px 20px 0;
+        }
+
+        /* 2. Scroll Margin & Smooth Animation */
+        [id] {
+            scroll-margin-top: 120px;
+            transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        /* 3. Global Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        footer a:hover {
+            color: var(--primary) !important;
+            transform: translateY(-2px);
+        }
+
+        footer div a:hover {
+            border-color: var(--primary) !important;
+            box-shadow: 0 5px 15px rgba(99, 102, 241, 0.2);
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="logo">
+            <a href="index.html" style="text-decoration: none; color: var(--primary);">M.I.Zim</a>
+        </div>
+        <div style="display: flex; align-items: center; gap: 20px;">
+            <span style="font-weight: 600; color: #10b981; font-size: 0.9rem;">● Available for Hire</span>
+            <a href="#contact-creative" class="btn btn-primary" style="padding: 10px 20px; font-size: 0.9rem;">Hire
+                Me</a>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <h4 style="color: var(--primary); margin-bottom: 10px; font-weight: 800;">HELLO WORLD, I AM</h4>
+            <h1>Building <span>Digital Products</span> & Experiences.</h1>
+            <p>I am <b>Md. Mohaiminul Islam Zim</b>, a Full-Stack Web Developer based in Rangpur. Specialist in Laravel,
+                JavaScript, and crafting high-end user interfaces.</p>
+            <div class="hero-btns">
+                <a href="#projects" class="btn btn-primary">View My Work</a>
+                <a href="#contact" class="btn btn-outline">Let's Talk</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="section" id="projects">
+        <h2 class="section-title">Industry-Grade <span>Solutions</span></h2>
+        <p style="text-align: center; color: #94a3b8; margin-top: -40px; margin-bottom: 60px;">Developing
+            high-performance digital architectures for diverse business sectors.</p>
+
+        <div class="grid">
+            <a href="#ecommerce-details" class="project-card"
+                style="text-decoration: none; display: block; color: inherit;">
+                <img src="https://images.pexels.com/photos/230544/pexels-photo-230544.jpeg?auto=compress&cs=tinysrgb&w=600"
+                    alt="E-commerce"
+                    style="width: 100%; height: 180px; object-fit: cover; border-radius: 12px; margin-bottom: 20px;">
+                <h3>E-Commerce & Retail</h3>
+                <p style="color: #94a3b8; margin-bottom: 20px;">Online shopping experience with advanced cart logic,
+                    secure payment gateways, and order tracking systems.</p>
+                <div style="margin-bottom: 10px;">
+                    <span class="tag">Inventory System</span>
+                    <span class="tag">Digital Payment</span>
+                </div>
+                <span style="color: var(--primary); font-weight: 600;">View Details →</span>
+            </a>
+
+            <a href="#edu-details" class="project-card" style="text-decoration: none; display: block; color: inherit;">
+                <img src="https://images.pexels.com/photos/301920/pexels-photo-301920.jpeg?auto=compress&cs=tinysrgb&w=600"
+                    alt="Education"
+                    style="width: 100%; height: 180px; object-fit: cover; border-radius: 12px; margin-bottom: 20px;">
+                <h3>Educational Platforms</h3>
+                <p style="color: #94a3b8; margin-bottom: 20px;">Student information systems, online learning portals,
+                    and administrative management for modern institutions.</p>
+                <div style="margin-bottom: 10px;">
+                    <span class="tag">LMS</span>
+                    <span class="tag">Admin Panel</span>
+                </div>
+                <span style="color: var(--primary); font-weight: 600;">View Details →</span>
+            </a>
+
+            <a href="#corp-details" class="project-card" style="text-decoration: none; display: block; color: inherit;">
+                <img src="https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=600"
+                    alt="Corporate"
+                    style="width: 100%; height: 180px; object-fit: cover; border-radius: 12px; margin-bottom: 20px;">
+                <h3>Corporate Business</h3>
+                <p style="color: #94a3b8; margin-bottom: 20px;">High-end corporate landing pages and enterprise identity
+                    systems for industry leaders and offices.</p>
+                <div style="margin-bottom: 10px;">
+                    <span class="tag">Branding</span>
+                    <span class="tag">Professional UI</span>
+                </div>
+                <span style="color: var(--primary); font-weight: 600;">View Details →</span>
+            </a>
+
+            <a href="#admin-details" class="project-card"
+                style="text-decoration: none; display: block; color: inherit;">
+                <img src="https://images.pexels.com/photos/590022/pexels-photo-590022.jpeg?auto=compress&cs=tinysrgb&w=600"
+                    alt="Management"
+                    style="width: 100%; height: 180px; object-fit: cover; border-radius: 12px; margin-bottom: 20px;">
+                <h3>Control & Management</h3>
+                <p style="color: #94a3b8; margin-bottom: 20px;">Full-stack user management systems with RBAC, data
+                    visualization, and cloud deployment logic.</p>
+                <div style="margin-bottom: 10px;">
+                    <span class="tag">Laravel Core</span>
+                    <span class="tag">Data Analytics</span>
+                </div>
+                <span style="color: var(--primary); font-weight: 600;">View Details →</span>
+            </a>
+
+            <a href="#health-details" class="project-card"
+                style="text-decoration: none; display: block; color: inherit;">
+                <img src="https://images.pexels.com/photos/40568/medical-appointment-doctor-healthcare-40568.jpeg?auto=compress&cs=tinysrgb&w=600"
+                    alt="Healthcare"
+                    style="width: 100%; height: 180px; object-fit: cover; border-radius: 12px; margin-bottom: 20px;">
+                <h3>Health Tech Solutions</h3>
+                <p style="color: #94a3b8; margin-bottom: 20px;">Smart clinic management, patient record handling, and
+                    appointment scheduling systems for doctors.</p>
+                <div style="margin-bottom: 10px;">
+                    <span class="tag">Health Portal</span>
+                    <span class="tag">Medical CRM</span>
+                </div>
+                <span style="color: var(--primary); font-weight: 600;">View Details →</span>
+            </a>
+        </div>
+    </section>
+
+    <section class="section" style="background: var(--card-bg);">
+        <h2 class="section-title">My <span>Tech Stack</span></h2>
+        <div class="skills">
+            <div class="skill-chip">HTML5</div>
+            <div class="skill-chip">CSS3 / Tailwind</div>
+            <div class="skill-chip">JavaScript (ES6+)</div>
+            <div class="skill-chip">Laravel</div>
+            <div class="skill-chip">PHP</div>
+            <div class="skill-chip">MySQL</div>
+            <div class="skill-chip">Git & GitHub</div>
+        </div>
+    </section>
+
+    <section class="section" id="detailed-info" style="background: var(--bg); border-top: 1px solid var(--border);">
+        <h2 class="section-title">Solution <span>Deep Dive</span></h2>
+
+        <div style="max-width: 900px; margin: 0 auto;">
+
+            <div id="ecommerce-details"
+                style="margin-bottom: 60px; padding: 30px; border-left: 4px solid var(--primary); background: var(--card-bg); border-radius: 0 20px 20px 0;">
+                <h3 style="margin-bottom: 15px;">🛍️ E-Commerce & Retail Details</h3>
+                <p style="line-height: 1.8; color: #94a3b8;">
+                    I build high-converting online stores that focus on user experience and speed. My solutions include
+                    advanced product filtering, seamless shopping carts, and integration with local and international
+                    payment gateways like SSLCommerz, Bkash, or Stripe. From inventory management to automatic invoice
+                    generation, I ensure your retail business runs smoothly on the digital front.
+                </p>
+            </div>
+
+            <div id="edu-details"
+                style="margin-bottom: 60px; padding: 30px; border-left: 4px solid var(--primary); background: var(--card-bg); border-radius: 0 20px 20px 0;">
+                <h3 style="margin-bottom: 15px;">🎓 Educational Systems Details</h3>
+                <p style="line-height: 1.8; color: #94a3b8;">
+                    My educational portals are designed to bridge the gap between students, teachers, and parents. I
+                    develop modules for online admission, automated result processing, and digital attendance tracking.
+                    These systems are highly secure and can handle thousands of concurrent users, providing a
+                    centralized dashboard for managing all academic and administrative activities of an institution.
+                </p>
+            </div>
+
+            <div id="corp-details"
+                style="margin-bottom: 60px; padding: 30px; border-left: 4px solid var(--primary); background: var(--card-bg); border-radius: 0 20px 20px 0;">
+                <h3 style="margin-bottom: 15px;">🏢 Corporate & Enterprise Details</h3>
+                <p style="line-height: 1.8; color: #94a3b8;">
+                    For businesses looking for a professional edge, I create sleek and high-performance corporate
+                    websites. I focus on branding, SEO-optimized content structures, and fast-loading pages that reflect
+                    the company's identity. My corporate solutions often include dynamic service sections, client
+                    testimonial carousels, and integrated lead generation forms to convert visitors into partners.
+                </p>
+            </div>
+
+            <div id="admin-details"
+                style="margin-bottom: 60px; padding: 30px; border-left: 4px solid var(--primary); background: var(--card-bg); border-radius: 0 20px 20px 0;">
+                <h3 style="margin-bottom: 15px;">🔐 Control & Management Details</h3>
+                <p style="line-height: 1.8; color: #94a3b8;">
+                    Using the power of Laravel and modern database structures, I build robust admin panels and SaaS
+                    architectures. These systems feature Role-Based Access Control (RBAC), real-time data visualization
+                    through charts, and secure API integrations. Whether it's managing employees or tracking complex
+                    financial data, my backend solutions are built for scalability and maximum security.
+                </p>
+            </div>
+
+            <div id="health-details"
+                style="margin-bottom: 60px; padding: 30px; border-left: 4px solid var(--primary); background: var(--card-bg); border-radius: 0 20px 20px 0;">
+                <h3 style="margin-bottom: 15px;">🏥 Health Tech Solutions Details</h3>
+                <p style="line-height: 1.8; color: #94a3b8;">
+                    My healthcare applications prioritize patient data security and ease of use. I develop systems for
+                    online doctor appointments, digital prescription management, and patient history tracking. By
+                    implementing smart scheduling algorithms, I help clinics reduce waiting times and improve the
+                    overall efficiency of their medical services, all through a clean and intuitive user interface.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="contact-creative" style="padding: 100px 10%; background: var(--bg); overflow: hidden;">
+        <div style="background: var(--primary); 
+                    padding: 80px 50px; 
+                    color: white; 
+                    clip-path: polygon(10% 0%, 100% 0%, 90% 100%, 0% 100%); 
+                    position: relative;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    text-align: center;">
+
+            <h2 style="font-size: 2.5rem; margin-bottom: 20px; font-weight: 800;">Let's Build Something
+                <br><span>Extraordinary</span>
+            </h2>
+            <p style="max-width: 600px; opacity: 0.9; margin-bottom: 40px; font-size: 1.1rem;">
+                I am currently available for new projects. If you have an idea or need a website for your business, then
+                knock me directly.
+            </p>
+
+            <div style="display: flex; gap: 20px; flex-wrap: wrap; justify-content: center;">
+                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=mizim4042@gmail.com" target="_blank" class="btn"
+                    style="background: white; color: var(--primary); padding: 15px 40px; text-decoration: none;">
+                    Email Me (Gmail)
+                </a>
+
+                <a href="tel:+8801805229401" class="btn"
+                    style="background: rgba(255,255,255,0.2); color: white; border: 1px solid white; padding: 15px 40px; text-decoration: none;">Call
+                    Now</a>
+            </div>
+
+            <div
+                style="position: absolute; top: -20px; right: 10%; width: 100px; height: 100px; background: rgba(255,255,255,0.1); border-radius: 50%;">
+            </div>
+            <div
+                style="position: absolute; bottom: -30px; left: 5%; width: 150px; height: 150px; background: rgba(255,255,255,0.1); border-radius: 50%;">
+            </div>
+        </div>
+    </section>
+
+    <footer
+        style="background: var(--card-bg); padding: 80px 10% 30px; border-top: 1px solid var(--border); position: relative;">
+        <div
+            style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; margin-bottom: 50px; text-align: left;">
+
+            <div>
+                <div class="logo" style="margin-bottom: 20px;">
+                    <a href="index.html"
+                        style="text-decoration: none; color: var(--primary); font-size: 1.8rem;">M.I.Zim</a>
+                </div>
+                <p style="color: #94a3b8; font-size: 0.95rem; line-height: 1.6;">
+                    As a passionate full-stack developer, I believe in making digital experiences simple and beautiful.
+                    By God's grace, my goal is to turn your dreams into reality through coding.
+                </p>
+            </div>
+
+            <div>
+                <h4 style="margin-bottom: 25px; color: var(--text); font-weight: 700;">Explore</h4>
+                <ul style="list-style: none;">
+                    <li style="margin-bottom: 12px;"><a href="#projects"
+                            style="color: #94a3b8; text-decoration: none; transition: 0.3s;">Projects</a></li>
+                    <li style="margin-bottom: 12px;"><a href="#detailed-info"
+                            style="color: #94a3b8; text-decoration: none; transition: 0.3s;">Services</a></li>
+                    <li style="margin-bottom: 12px;"><a href="#contact-creative"
+                            style="color: #94a3b8; text-decoration: none; transition: 0.3s;">Hire Me</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 style="margin-bottom: 25px; color: var(--text); font-weight: 700;">Connect</h4>
+                <div style="display: flex; gap: 15px;">
+                    <a href="https://github.com/mohaiminulislamzim4042" target="_blank"
+                        style="width: 45px; height: 45px; background: var(--bg); border: 1px solid var(--border); border-radius: 12px; display: flex; align-items: center; justify-content: center; text-decoration: none; color: var(--text); transition: 0.3s;">GH</a>
+                    <a href="#" target="_blank"
+                        style="width: 45px; height: 45px; background: var(--bg); border: 1px solid var(--border); border-radius: 12px; display: flex; align-items: center; justify-content: center; text-decoration: none; color: var(--text); transition: 0.3s;">LI</a>
+                    <a href="https://www.facebook.com/mohaiminul.islam.4042/" target="_blank"
+                        style="width: 45px; height: 45px; background: var(--bg); border: 1px solid var(--border); border-radius: 12px; display: flex; align-items: center; justify-content: center; text-decoration: none; color: var(--text); transition: 0.3s;">FB</a>
+                </div>
+            </div>
+        </div>
+
+        <div
+            style="border-top: 1px solid var(--border); padding-top: 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;">
+            <p style="color: #64748b; font-size: 0.9rem;">&copy; 2026 M.I.Zim — All Rights Reserved.</p>
+            <p style="color: #64748b; font-size: 0.9rem;">Made with ❤️ & ☕ by <b>Md.Mohaiminul Islam Zim</b></p>
+        </div>
+    </footer>
+
+</body>
+
+</html>
